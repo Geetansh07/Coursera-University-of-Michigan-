@@ -1,0 +1,41 @@
+
+#2
+import urllib.request,urllib.parse,urllib.error
+from bs4 import BeautifulSoup
+import re
+
+url = input("Enter url ")
+count = int(input("count "))
+position = int(input("Position "))
+list1 = []
+for i in range(0,count):
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html,'html.parser')
+    tags = soup('a')
+    for tag in tags:
+        item = tag.get('href', None)
+        list1.append(item)
+    url = list1[position-1]
+    list1 = []
+    print(url)
+    
+    
+#1
+import urllib.request,urllib.parse,urllib.error
+from bs4 import BeautifulSoup
+
+import re
+url = input("Enter")
+html = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(html,'html.parser')
+
+sum = 0
+#Retriving all the tags
+tags = soup('span')
+for tag in tags:
+    tag = tag.decode()
+    items = re.findall('[0-9]+',tag)
+    for i in items:
+        i = int(i)
+        sum+=i
+print(sum)
