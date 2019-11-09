@@ -1,0 +1,21 @@
+import urllib.request, urllib.parse, urllib.error
+import xml.etree.ElementTree as ET
+
+#urllib operation
+file = urllib.request.urlopen("http://py4e-data.dr-chuck.net/comments_302869.xml")
+data = file.read()
+data = data.decode().strip()
+
+#XML Opeartion
+stuff = ET.fromstring(data)
+find_all_cmnt = stuff.findall('.//comment')
+length = len(find_all_cmnt)
+
+sum_of_count = 0
+for item in find_all_cmnt:
+    number = int(item.find('count').text)
+    sum_of_count += number
+print(sum_of_count)
+
+
+Answer = 2838
